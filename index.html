@@ -364,6 +364,8 @@ body{font-family:var(--it)}
 .ra span{display:block;padding:10px 6px;border:1px solid #b89a62aa;border-radius:14px;background:#ffffff70;font-family:"Tajawal",system-ui,sans-serif;font-size:12.5px;color:var(--ink);transition:all .3s}
 .ra input:checked+span{background:linear-gradient(110deg,#2d3f26,#566b48);color:#e9e2c0;border-color:#2d3f26}
 .rf .btn{margin-top:6px;align-self:center;font-family:"Tajawal",system-ui,sans-serif;font-size:13px;letter-spacing:.08em;padding:12px 34px}
+.rbtns{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.rbtns .btn{margin:0!important;width:100%;padding:12px 10px!important;letter-spacing:.04em!important}
 .rerr{min-height:16px;font-family:"Tajawal",system-ui,sans-serif;font-size:12px;color:#9a3b2e}
 </style>
 </head>
@@ -489,7 +491,10 @@ body{font-family:var(--it)}
         <label><input type="radio" name="att" value="no"><span>مش هقدر أحضر</span></label>
       </div>
       <textarea id="rm" rows="3" placeholder="اكتب رسالة للعريس والعروسة" maxlength="300"></textarea>
-      <button type="button" class="btn" id="rs">تأكيد الحضور</button>
+      <div class="rbtns">
+        <button type="button" class="btn" id="rs">إرسال إلى إسلام</button>
+        <button type="button" class="btn" id="rb2">إرسال إلى بسمة</button>
+      </div>
       <div class="rerr" id="rerr"></div>
     </form>
   </div>
@@ -637,17 +642,17 @@ document.querySelectorAll(".heart").forEach(h=>{for(let i=0;i<5;i++){const d=doc
 
 <script>
 (function(){
- var b=document.getElementById("rs"),prev=b.onclick;
- b.onclick=function(){
+ function send(num){
   var n=document.getElementById("rn").value.trim(),m=document.getElementById("rm").value.trim(),
       a=document.querySelector('input[name="att"]:checked').value,e=document.getElementById("rerr");
   if(!n){e.textContent="من فضلك اكتب اسمك";document.getElementById("rn").focus();return}
   e.textContent="";
   var t="السلام عليكم 👋\nأنا: "+n+"\nالحضور: "+(a==="yes"?"✅ جاي إن شاء الله":"❌ مش هقدر أحضر للأسف")+(m?"\nالرسالة: "+m:"");
-  var url="https://wa.me/201022502836?text="+encodeURIComponent(t);
-  if(prev)prev.call(this);
-  setTimeout(function(){var w=window.open(url,"_blank");if(!w)location.href=url},500);
- };
+  var url="https://wa.me/"+num+"?text="+encodeURIComponent(t);
+  var w=window.open(url,"_blank");if(!w)location.href=url;
+ }
+ document.getElementById("rs").onclick=function(){send("201022502836")};
+ document.getElementById("rb2").onclick=function(){send("201120947517")};
 })();
 </script>
 </body>
