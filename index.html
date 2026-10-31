@@ -586,7 +586,7 @@ function openGate(){
   setTimeout(()=>{gate.classList.add("fade");lateEls.forEach(el=>io.observe(el))},800);
  },3050);
  setTimeout(()=>{document.documentElement.classList.remove("lock");scrollTo(0,0);gate.remove();
-  setTimeout(()=>{if(autoOK&&scrollY<5)setA(true)},2500)},5300);
+  setTimeout(()=>{if(autoOK&&scrollY<5)setA(true)},500)},5300);
 }
 gate.addEventListener("click",openGate);
 gate.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openGate()}});
